@@ -1,19 +1,21 @@
-package com.example.filter;
+package com.example;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@WebFilter(
-        filterName = "TransferRequestLogFilter",
-        urlPatterns = {"/"})
-public class TransferRequestLogFilter implements Filter {
+@Component
+@Order(1)
+public class TransferRequestLogFilter extends OncePerRequestFilter {
+
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        System.out.println("TransferRequestLogFilter-" + httpServletRequest.getRequestURI());
-        filterChain.doFilter(servletRequest, servletResponse);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        System.out.println("TransferRequestLogFilter-" + request.getRequestURI());
+        filterChain.doFilter(request, response);
     }
 }
