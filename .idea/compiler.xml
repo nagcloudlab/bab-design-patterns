@@ -10,6 +10,7 @@
         <module name="SOLID-principles" />
         <module name="creational-design-patterns" />
         <module name="behavioral-design-patterns" />
+        <module name="structural-patterns" />
         <module name="transfer-service" />
       </profile>
     </annotationProcessing>
